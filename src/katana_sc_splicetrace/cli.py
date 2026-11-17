@@ -1,4 +1,4 @@
-"""Standalone CLI for katana-sc-splicetrace (2.3.0) with Extensible Motif Database v3.0."""
+"""Standalone CLI for katana-sc-splicetrace (2.3.1) with Extensible Motif Database v3.0."""
 from __future__ import annotations
 
 import argparse
@@ -22,13 +22,13 @@ from katana_sc_splicetrace.protein_consequences import trace_protein_and_nmd_con
 from katana_sc_splicetrace.rna_forms import IndexedFasta
 from katana_sc_splicetrace.target_and_psi_models import rank_rbp_target_events_v2
 
-__version__ = "2.3.0"
+__version__ = "2.3.1"
 
 
 def write_nfcore_versions_yml(path: Path | str, process_name: str = "KATANA_SCSPLICETRACE") -> None:
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(f'"{process_name}":\n    katana-sc-splicetrace: "2.3.0"\n    python: "{platform.python_version()}"\n', encoding="utf-8")
+    p.write_text(f'"{process_name}":\n    katana-sc-splicetrace: "2.3.1"\n    python: "{platform.python_version()}"\n', encoding="utf-8")
 
 
 def add_extensible_library_args(parser: argparse.ArgumentParser) -> None:
@@ -208,11 +208,13 @@ def main(argv: list[str] | None = None) -> int:
     (out / "sc_motiftrace_summary_v21.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     if args.emit_versions_yml is not None:
         write_nfcore_versions_yml(args.emit_versions_yml, args.process_name)
-    print(json.dumps(summary))
-        if args.gtf is not None and args.events is not None and args.fasta is not None:
+    if args.gtf is not None and args.events is not None and args.fasta is not None:
         ev_in = pd.read_csv(args.events, sep="\t")
-        p_df = trace_protein_and_nmd_consequences(ev_in.head(500), args.gtf, args.fasta, indexed_fasta_cls=IndexedFasta)
+        p_df = trace_protein_and_nmd_consequences(ev_in.head(500), args.gtf, args.fasta, indexed_fasta_cls=IndexedFasta, species=args.species)
         p_df.to_csv(out / "sc_protein_and_nmd_consequences_v23.tsv", sep="\t", index=False)
+        summary["protein_consequences_evaluated"] = int(len(p_df))
+    (out / "sc_motiftrace_summary_v21.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    print(json.dumps(summary))
     return 0
 
 

@@ -1,4 +1,4 @@
-"""Katana Single-Cell MotifTrace 2.2.0 (Smart-seq3) with Extensible Library v3.0."""
+"""Katana Single-Cell MotifTrace 2.3.1 (Smart-seq3) with Extensible Library v3.0."""
 from katana_sc_splicetrace.contrast_discovery import (
     SCMotifContrastResultV2,
     compute_sc_splicing_contrast_v2,
@@ -25,7 +25,7 @@ from katana_sc_splicetrace.target_and_psi_models import (
     rank_rbp_target_events_v2,
 )
 
-__version__ = "2.3.0"
+__version__ = "2.3.1"
 
 __all__ = [
     "__version__",
@@ -52,3 +52,5 @@ __all__ = [
 from katana_sc_splicetrace.fast_accel import HAS_NUMBA, configure_server_threads, fast_score_mean_log_odds
 from katana_sc_splicetrace.protein_consequences import load_gtf_coding_transcripts, trace_protein_and_nmd_consequences
 from katana_sc_splicetrace.rna_forms import IndexedFasta
+
+from katana_sc_splicetrace.protein_consequences import load_bundled_uniprot_domains
