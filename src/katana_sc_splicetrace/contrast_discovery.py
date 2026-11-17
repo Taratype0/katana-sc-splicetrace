@@ -359,10 +359,10 @@ def discover_sc_rbp_programs_v2(
     else:
         inference_mode = "gene_block_rademacher_maxT"
         B = int(n_permutations)
-        signs = rng.choice([-1.0, 1.0], size=(B, n_genes))
+        signs = rng.choice(np.array([-1.0, 1.0], dtype=np.float32), size=(B, n_genes))
         S_norm = np.divide(S_gene, denom_gene[None, :], out=np.zeros_like(S_gene), where=valid_col[None, :])
         Z_obs = Z_gene_obs.copy()
-        null_Z = signs @ S_norm  # B x (n_reg * n_rbp)
+        null_Z = (signs @ np.ascontiguousarray(S_norm, dtype=np.float32)).astype(np.float64)
 
         Z_obs_2d = Z_obs.reshape(n_reg, n_rbp)
         null_3d = null_Z.reshape(B, n_reg, n_rbp)
