@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "katana-sc-splicetrace"
-version = "2.4.0"
+version = "2.4.1"
 description = "KatanaAS single-cell Smart-seq3 alternative splicing RBP discovery, mature-mRNA motif tracing, ORF/NMD consequences, and precision PSI modeling."
 readme = "README.md"
 license = {text = "MIT"}

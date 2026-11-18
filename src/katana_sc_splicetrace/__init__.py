@@ -1,4 +1,4 @@
-"""Katana-SC-SpliceTrace 2.4.0 — Smart-seq3 RBP discovery, mature-mRNA motif, Module-RBP bridge & GTF/UniProt ORF/NMD engine."""
+"""Katana-SC-SpliceTrace 2.4.1 — Smart-seq3 RBP discovery, mature-mRNA motif, Module-RBP bridge & GTF/UniProt ORF/NMD engine."""
 from katana_sc_splicetrace.contrast_discovery import (
     SCMotifContrastResultV2,
     compute_sc_splicing_contrast_v2,
@@ -84,4 +84,4 @@ try:
 except ImportError:
     pass
 
-__version__ = "2.4.0"
+__version__ = "2.4.1"

@@ -8,7 +8,7 @@ from katana_sc_splicetrace.cli import main as sc_cli_main
 
 
 def test_sc_exports_uniprot_and_cli() -> None:
-    assert ksc.__version__ == "2.4.0"
+    assert ksc.__version__ == "2.4.1"
     for sym in ksc.__all__:
         assert hasattr(ksc, sym), f"Missing export {sym}"
     lib_h = ksc.load_bundled_human_rbp_library(species="human")

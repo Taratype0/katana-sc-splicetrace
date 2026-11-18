@@ -1,4 +1,4 @@
-"""Standalone CLI for katana-sc-splicetrace (2.4.0) with Extensible Motif DB v3.0, Module Bridge & GTF/UniProt Proteome Viz."""
+"""Standalone CLI for katana-sc-splicetrace (2.4.1) with Extensible Motif DB v3.0, Module Bridge & GTF/UniProt Proteome Viz."""
 from __future__ import annotations
 
 import argparse
@@ -24,13 +24,13 @@ from katana_sc_splicetrace.sequence_and_consequence import (
 )
 from katana_sc_splicetrace.target_and_psi_models import rank_rbp_target_events_v2
 
-__version__ = "2.4.0"
+__version__ = "2.4.1"
 
 
 def write_nfcore_versions_yml(path: Path | str, process_name: str = "KATANA_SCSPLICETRACE") -> None:
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(f'"{process_name}":\n    katana-sc-splicetrace: "2.4.0"\n    python: "{platform.python_version()}"\n', encoding="utf-8")
+    p.write_text(f'"{process_name}":\n    katana-sc-splicetrace: "2.4.1"\n    python: "{platform.python_version()}"\n', encoding="utf-8")
 
 
 def add_extensible_library_args(parser: argparse.ArgumentParser) -> None:
@@ -114,7 +114,7 @@ def handle_library_management_commands(args: argparse.Namespace) -> tuple[bool, 
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(
         prog="katana-sc-splicetrace",
-        description="Katana SC-SpliceTrace 2.4.0: Smart-seq3 RBP discovery, mature-mRNA motif, Module Bridge & GTF/UniProt Proteome Consequences.",
+        description="Katana SC-SpliceTrace 2.4.1: Smart-seq3 RBP discovery, mature-mRNA motif, Module Bridge & GTF/UniProt Proteome Consequences.",
     )
     p.add_argument("--version", action="version", version=f"katana-sc-splicetrace {__version__}")
     p.add_argument("--events", type=Path, required=False)
@@ -135,7 +135,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--assignments-tsv", type=Path, default=None)
     p.add_argument("--permutations", type=int, default=1999)
     p.add_argument("--seed", type=int, default=20261117)
-    p.add_argument("--out", "--output-dir", dest="out", type=Path, required=False)
+    p.add_argument("-o", "--out", "--output-dir", dest="out", type=Path, required=False)
     p.add_argument("--emit-versions-yml", type=Path, default=None)
     p.add_argument("--process-name", default="KATANA_SCSPLICETRACE")
     add_extensible_library_args(p)
